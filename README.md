@@ -25,3 +25,6 @@ The following hunting locations have been built
 - Bristle Woods Rift
 - Valor Rift
 
+# Detailed Usage
+## Installing Virtual Environmnet
+Installing virtual environment by executing `<test>`
