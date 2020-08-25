@@ -90,6 +90,50 @@ List the preferred doors in order of descending preference, and pass it as an ar
 
 
 ```
-mh_labyrinth = Labyrinth(acc2_cookies, acc2_body, debug=True)
+mh_labyrinth = Labyrinth(howard_cookies, howard_body)
 mh_labyrinth.automateHunt(['y3l','y3m','y3s','y2l', 'y2m', 'y2s', 'yl', 'ym', 'ys'])
+```
+
+## Bristle Woods Rift
+In Bristle Woods Rift, user input is required for the following items.
+1. Toggling of Quantum Quarts
+2. Chance of Traps
+3. Change of Cheese
+4. Portal selection
+5. Scramble portals
+
+The algorithm is designed to optimize cost and maximize yield. It is recommended to have at least 40 Quantum Quarts and 10 Portal Scramblers (option) to use the script. 
+
+**Configure Trap Setup in each chamber**
+User can configure whether to use Quantum Quarts, type of cheese and type of charm to use in each chamber by configuring the bwrift_config.py. Configuration is required.
+
+```
+'security_chamber': {
+    'quantumQuarts': True,
+    'bait': 'magical_string_cheese',
+    'trinket': 'rift_vacuum_trinket'
+}
+```
+
+The following options are recommended:
+Cheese Options (bait)
+- brie_string_cheese
+- runic_string_cheese
+- ancient_string_cheese
+
+Charm Options (trinket)
+- rift_vacuum_trinket
+- super_rift_vacuum_trinket
+- rift_trinket
+
+
+** Chamber Selection **
+The chambers are selected automatically based on the user's stats. This is still work in progress.
+
+## Valour Rift
+In Valour Rift, the user input comes in during the toggling of Champion's Fire. Champion's fire is activated on Floor 8 and deactivated on every other floor.
+
+```
+mh_vrift = Vrift(howard_cookies, howard_body)
+mh_vrift.automateHunt()
 ```
