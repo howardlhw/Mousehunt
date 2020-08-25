@@ -98,14 +98,20 @@ In Labyrinth, user is required to have 5-10 shuffler's cube to enable shuffling 
 -   Scholar - Epic Scholar (s3), Superior Scholar (s2), Plain Scholar (s)
 -   Tech - Epic Tech (h3), Superior Tech (h2), Plain Tech (h)
 
-Each door comes with 3 lenght variations, they are short (s), medium (m), or long (l). The choice of door in order of preference will be [doorname][length]. For example
+Each door comes with 3 lenght variations, they are:
+
+-   short (s)
+-   medium (m)
+-   long (l)
+
+The name of the choice of door will be [doorname][length]. For example
 
 -   Long Epic Fealty - y3l
 -   Short Epic Fealty - y3s
 -   Medium Superior Tech - h3m
 -   Short Superiod Tech - h2s
 
-List the preferred doors in order of descending preference, and pass it as an array to the automateHunt method. For example, if the preferred door is `['y3l','y3m','y3s','y2l', 'y2m', 'y2s', 'yl', 'ym', 'ys']`, the corresponding method to activate is as below. The algorithm shuffles the door when the preferred door is not found.
+List the preferred doors in order of descending preference, and pass it as an array to the automateHunt method. For example, if the preferred door is `['y3l','y3m','y3s','y2l', 'y2m', 'y2s', 'yl', 'ym', 'ys']`, the corresponding method to execute is as below. The algorithm shuffles the door when the preferred door is not found.
 
 ```
 mh_labyrinth = Labyrinth(user)
@@ -114,7 +120,7 @@ mh_labyrinth.automateHunt(['y3l','y3m','y3s','y2l', 'y2m', 'y2s', 'yl', 'ym', 'y
 
 ## Bristle Woods Rift
 
-In Bristle Woods Rift, user input is required for the following items.
+In Bristle Woods Rift, user input is required for the following actions.
 
 1. Toggling of Quantum Quarts
 2. Chance of Traps
@@ -126,7 +132,7 @@ The algorithm is designed to optimize cost and maximize yield. It is recommended
 
 **Configure Trap Setup in each chamber**
 
-User can configure whether to use Quantum Quarts, type of cheese and type of charm to use in each chamber by configuring the bwrift_config.py. Configuration is required.
+User can configure whether to use Quantum Quarts, type of cheese and type of charm to use in each chamber by configuring the bwrift_config.py. Configuration is required. You can also use the default configuration.
 
 ```
 'security_chamber': {
@@ -136,7 +142,7 @@ User can configure whether to use Quantum Quarts, type of cheese and type of cha
 }
 ```
 
-The following options are recommended:
+The following choices of bait and charma are available:
 Cheese Options (bait)
 
 -   brie_string_cheese
@@ -149,12 +155,9 @@ Charm Options (trinket)
 -   super_rift_vacuum_trinket
 -   rift_trinket
 
-**Chamber Selection**
+The chambers are selected automatically based on the user's stats. **This is still work in progress**.
 
-The chambers are selected automatically based on the user's stats. This is still work in progress.
-
-**Activate Code**
-Activate by using the following codes.
+Execute the code by:
 
 ```
 mh_bwrift = BWrift(user)
@@ -164,6 +167,8 @@ mh_bwrift.automateHunt()
 ## Valour Rift
 
 In Valour Rift, the user input comes in during the toggling of Champion's Fire. Champion's fire is activated on Floor 8 and deactivated on every other floor.
+
+Execute the code by:
 
 ```
 mh_vrift = Vrift(user)
