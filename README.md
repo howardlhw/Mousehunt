@@ -1,4 +1,5 @@
 # Mousehunt
 
-Python scripts for making our mouse hunting lives easier. Currently only a few locations
-that we think are essential have been built
+Python scripts for making our mouse hunting lives easier. The following locations have been built due to the additional human-input requirement during hunting.
+
+
