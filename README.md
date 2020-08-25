@@ -56,10 +56,10 @@ pip install -r requirements.txt
 After logging into mousehunt, press F12 to access development tab. Click on 'camp' to trigger a round of data retrieval from server. Retrieve the token and unique hash as shown below.
 
 This is the location of token
-![Image of Yaktocat](https://www.github.com/howardlhw/images/token.png)
+![Image of token](https://raw.githubusercontent.com/howardlhw/Mousehunt/master/images/token.png)
 
 This is how you get the unique hash (uh)
-![Image of Yaktocat](https://www.github.com/howardlhw/images/unique_hash.png)
+![Image of hash](https://raw.githubusercontent.com/howardlhw/Mousehunt/master/images/unique_hash.png)
 
 ## Step 3 - Configuring app.py
 
