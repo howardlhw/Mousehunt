@@ -1,15 +1,15 @@
 from api import api_userData, api_call
-from util import eprint
+from util import eprint, debug
 import time
 
 class labyrinth():
-    def __init__(self, request_cookies, request_body):
+    def __init__(self, request_cookies, request_body, debug=False):
         self.URL = "https://www.mousehuntgame.com/managers/ajax/environment/labyrinth.php"
         self.quest = "QuestLabyrinth"
         self.request_cookies = request_cookies
         self.request_body = request_body
         self.data = api_userData(request_cookies)
-
+        self.debug = debug
 
     def isAtCurrentLocation(self):
         if self.data['user']['quests'].get(self.quest) != None:
@@ -26,12 +26,16 @@ class labyrinth():
         # y2 = superior fealty, s2 = superior scholar, h2 = superior tech
         # y3??
         # s = short, m = medium, l = long
+        debug(f'Preference: {doors_preference}', self.debug)
+        debug(f'Current Doors: {self.getCurrentDoors()}', self.debug)
 
         for preference in doors_preference:
             if preference in self.getCurrentDoors():
                 self.chosenDoor = preference
+                debug(f'Chosen: {preference}', self.debug)
                 return True
 
+        debug(f'Chosen None', self.debug)
         return False
 
     def enterSelectedDoor(self, choice):
@@ -51,7 +55,7 @@ class labyrinth():
             return
 
         # Check if the doors are opened
-        if list(set(self.getCurrentDoors()))[0] == None:
+        if len(list(set(self.getCurrentDoors())))==1 and list(set(self.getCurrentDoors()))[0] == None:
             eprint('Labyrinth', 'Doors closed')
             return 
 
@@ -59,6 +63,7 @@ class labyrinth():
         while(True):
             # Scarmble door if no preferred door
             if self.checkDesiredDoors(doorPreferences):
+                eprint('Labyrinth', f'Found door, door is {self.chosenDoor}')
                 break
 
             self.scrambleDoor()
