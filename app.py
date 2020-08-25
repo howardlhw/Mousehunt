@@ -1,7 +1,7 @@
 import time, datetime
-from labyrinth import labyrinth
-from vrift import vrift
-from bwrift import bwrift, trap_setup
+from labyrinth import Labyrinth
+from vrift import Vrift
+from bwrift import Bwrift, trap_setup
 
 cookies_howard = {
     "hg_session[sessionId]": "X719P43hXAZQM0C2ts840FK35vB52Zms",
@@ -29,14 +29,14 @@ body_acc2 = {"uh": "Gc112MbD"}
 
 def runHornContinuously():
     while True:
-        # mh_vrift = vrift(cookies_howard, body_howard)
+        # mh_vrift = Vrift(cookies_howard, body_howard)
         # mh_vrift.automateHunt()
 
-        mh_bwrift = bwrift(cookies_acc1, body_acc1)
+        mh_bwrift = Bwrift(cookies_acc1, body_acc1)
         # mh_bwrift.chamberSetup(trap_setup['magic_chamber'])
         mh_bwrift.automateHunt()
 
-        mh_labyrinth = labyrinth(cookies_acc2, body_acc2, debug=True)
+        mh_labyrinth = Labyrinth(cookies_acc2, body_acc2, debug=True)
         mh_labyrinth.automateHunt(['y3l','y3m','y3s','y2l', 'y2m', 'y2s', 'yl', 'ym', 'ys'])
 
         time.sleep(600)

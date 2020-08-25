@@ -51,7 +51,7 @@ trap_setup = {
 }
 
 
-class bwrift():
+class Bwrift():
     def __init__(self, request_cookies, request_body):
         self.URL = "https://www.mousehuntgame.com/managers/ajax/environment/rift_bristle_woods.php"
         self.quest = "QuestRiftBristleWoods"

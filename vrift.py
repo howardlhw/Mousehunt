@@ -3,7 +3,7 @@ from util import eprint
 import time
 
 
-class vrift():
+class Vrift():
     def __init__(self, request_cookies, request_body):
         self.URL = "https://www.mousehuntgame.com/managers/ajax/environment/rift_valour.php"
         self.quest = "QuestRiftValour"
@@ -35,7 +35,6 @@ class vrift():
             return True
 
         return False
-
 
     def automateHunt(self):
         if not self.isAtCurrentLocation():

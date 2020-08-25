@@ -2,7 +2,7 @@ from api import api_userData, api_call
 from util import eprint, debug
 import time
 
-class labyrinth():
+class Labyrinth():
     def __init__(self, request_cookies, request_body, debug=False):
         self.URL = "https://www.mousehuntgame.com/managers/ajax/environment/labyrinth.php"
         self.quest = "QuestLabyrinth"
