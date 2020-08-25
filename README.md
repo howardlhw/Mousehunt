@@ -25,6 +25,15 @@ The following hunting locations have been built
 - Bristle Woods Rift
 - Valor Rift
 
+**Activate Code**
+Activate by using the following codes.
+
+```
+mh_bwrift = BWrift(howard_cookies, howard_body)
+mh_bwrift.automateHunt()
+```
+
+
 # Detailed Usage
 ## Step 1 - Creating Virtual Environmnet
 If you have not installed virtual env, install by by executing `pip install virtualenv`
