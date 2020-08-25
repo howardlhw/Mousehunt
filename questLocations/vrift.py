@@ -1,15 +1,15 @@
-from api import api_userData, api_call
+from questLocations.api import api_userData, api_call
 from util import eprint
 import time
 
 
 class Vrift():
-    def __init__(self, request_cookies, request_body):
+    def __init__(self, request_acc):
         self.URL = "https://www.mousehuntgame.com/managers/ajax/environment/rift_valour.php"
         self.quest = "QuestRiftValour"
-        self.request_cookies = request_cookies
-        self.request_body = request_body
-        self.data = api_userData(request_cookies)
+        self.request_cookies = {"HG_TOKEN": request_acc['HG_TOKEN']}
+        self.request_body = {"uh": request_acc['uh']}
+        self.data = api_userData(self.request_cookies)
 
 
     def isAtCurrentLocation(self):

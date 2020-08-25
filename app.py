@@ -1,42 +1,37 @@
 import time, datetime
-from labyrinth import Labyrinth
-from vrift import Vrift
-from bwrift import Bwrift, trap_setup
+from questLocations.labyrinth import Labyrinth
+from questLocations.vrift import Vrift
+from questLocations.bwrift import Bwrift
+from questLocations.bwrift_trapSetup import trapSetup
 
-cookies_howard = {
-    "hg_session[sessionId]": "X719P43hXAZQM0C2ts840FK35vB52Zms",
-    "HG_TOKEN":
-    "k7e0InS5x4Jwz05LlZVW2s35u1y10POHOj3WeRfPo55BfC4SoDVqpGjfSJR8fD0y"
+
+howard = {
+    "HG_TOKEN": "k7e0InS5x4Jwz05LlZVW2s35u1y10POHOj3WeRfPo55BfC4SoDVqpGjfSJR8fD0y",
+    "uh": "RdQtaaE8"
 }
 
-body_howard = {"uh": "RdQtaaE8",}
-
-cookies_acc1 = {
-    "hg_session[sessionId]": "AETPxdJdk436jOgTE06P577va4lCBmJ5",
-    "HG_TOKEN":
-    "72wdLJWpIogUFJ912jQQf6TmcvbgmdM79Y6n094N155aM5BdWHHNmWFL79wS55ly",
+acc1 = {
+    "HG_TOKEN": "72wdLJWpIogUFJ912jQQf6TmcvbgmdM79Y6n094N155aM5BdWHHNmWFL79wS55ly",
+    "uh": "LeA1Z1B4"
 }
 
-body_acc1 = {"uh": "LeA1Z1B4"}
 
-cookies_acc2 = {
-    "HG_TOKEN":
-    "wI4Q2y0uk4TK1yifrR33vZw9Vq1FkZs73PD22VMSQ600HtOu1f5bn0s6L240278w",
-    "bb_sessionhash": "0dcaf65baddc3772685ac7cda0d5d9e2",
+acc2 = {
+    "HG_TOKEN": "wI4Q2y0uk4TK1yifrR33vZw9Vq1FkZs73PD22VMSQ600HtOu1f5bn0s6L240278w",
+    "uh": "Gc112MbD"
 }
 
-body_acc2 = {"uh": "Gc112MbD"}
 
 def runHornContinuously():
     while True:
-        # mh_vrift = Vrift(cookies_howard, body_howard)
-        # mh_vrift.automateHunt()
+        mh_vrift = Vrift(howard)
+        mh_vrift.automateHunt()
 
-        mh_bwrift = Bwrift(cookies_acc1, body_acc1)
-        # mh_bwrift.chamberSetup(trap_setup['magic_chamber'])
+        mh_bwrift = Bwrift(acc1)
+        # mh_bwrift.chamberSetup(trapSetup['acolyte_chamber']) # Currently has 87 sands
         mh_bwrift.automateHunt()
 
-        mh_labyrinth = Labyrinth(cookies_acc2, body_acc2, debug=True)
+        mh_labyrinth = Labyrinth(acc2, debug=True)
         mh_labyrinth.automateHunt(['y3l','y3m','y3s','y2l', 'y2m', 'y2s', 'yl', 'ym', 'ys'])
 
         time.sleep(600)

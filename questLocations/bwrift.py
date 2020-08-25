@@ -1,63 +1,16 @@
-from api import api_userData, api_call, api_changeTrap, api_usePotion
+from questLocations.api import api_userData, api_call, api_changeTrap, api_usePotion
+from questLocations.bwrift_trapSetup import trapSetup
 from util import eprint
 import time
 
-trap_setup = {
-    'security_chamber': {
-        'quantumQuarts': True,
-        'bait': 'magical_string_cheese',
-        'trinket': 'rift_vacuum_trinket'
-    },
-    'guard_barracks': {
-        'quantumQuarts': True,
-        'bait': 'magical_string_cheese',
-        'trinket': 'rift_vacuum_trinket'
-    },
-    'lucky_tower': {
-        'quantumQuarts': False,
-        'bait': 'brie_string_cheese',
-        'trinket': 'rift_trinkey'
-    },
-    'hidden_treasury': {
-        'quantumQuarts': True,
-        'bait': 'brie_string_cheese',
-        'trinket': 'rift_trinkey'
-    },
-    'acolyte_chamber': {
-        'quantumQuarts': True,
-        'bait': 'runic_string_cheese',
-        'trinket': 'super_rift_vacuum_trinket'
-    },
-    'timewarp_chamber': {
-        'quantumQuarts': False,
-        'bait': 'runic_string_cheese',
-        'trinket': 'rift_trinket'
-    },
-    'magic_chamber': {
-        'quantumQuarts': False,
-        'bait': 'ancient_string_cheese',
-        'trinket': 'rift_trinket'
-    },
-    'ancient_chamber': {
-        'quantumQuarts': False,
-        'bait': 'brie_string_cheese',
-        'trinket': 'rift_trinkey'
-    },
-    'gearWorks': {
-        'quantumQuarts': False,
-        'bait': 'brie_string_cheese',
-        'trinket': 'super_rift_vacuum_trinket'
-    }
-}
-
 
 class Bwrift():
-    def __init__(self, request_cookies, request_body):
+    def __init__(self, request_acc):
         self.URL = "https://www.mousehuntgame.com/managers/ajax/environment/rift_bristle_woods.php"
         self.quest = "QuestRiftBristleWoods"
-        self.request_cookies = request_cookies
-        self.request_body = request_body
-        self.data = api_userData(request_cookies)
+        self.request_cookies = {"HG_TOKEN": request_acc['HG_TOKEN']}
+        self.request_body = {"uh": request_acc['uh']}
+        self.data = api_userData(self.request_cookies)
 
         # Customize settings
         self.usePortalScrambler = False
@@ -129,6 +82,7 @@ class Bwrift():
         """
         self.request_body['action'] = 'enter_portal'
         self.request_body['portal_type'] = portalName
+        eprint('Bristle Woods Rift', f'Entering {portalName}')
         return api_call(self.URL, self.request_cookies, self.request_body)
 
     # Chamber condition setters
@@ -236,5 +190,4 @@ class Bwrift():
         if determinedPortal == None:
             return
         self.selectChamber(determinedPortal)
-        self.chamberSetup(trap_setup['magic_chamber'])
-        eprint('Bristle Woods Rift', f'Entered {determinedPortal}')
+        self.chamberSetup(trapSetup[determinedPortal])
