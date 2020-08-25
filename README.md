@@ -105,6 +105,7 @@ In Bristle Woods Rift, user input is required for the following items.
 The algorithm is designed to optimize cost and maximize yield. It is recommended to have at least 40 Quantum Quarts and 10 Portal Scramblers (option) to use the script. 
 
 **Configure Trap Setup in each chamber**
+
 User can configure whether to use Quantum Quarts, type of cheese and type of charm to use in each chamber by configuring the bwrift_config.py. Configuration is required.
 
 ```
@@ -126,9 +127,18 @@ Charm Options (trinket)
 - super_rift_vacuum_trinket
 - rift_trinket
 
+**Chamber Selection**
 
-** Chamber Selection **
 The chambers are selected automatically based on the user's stats. This is still work in progress.
+
+**Activate Code**
+Activate by using the following codes.
+
+```
+mh_bwrift = BWrift(howard_cookies, howard_body)
+mh_bwrift.automateHunt()
+```
+
 
 ## Valour Rift
 In Valour Rift, the user input comes in during the toggling of Champion's Fire. Champion's fire is activated on Floor 8 and deactivated on every other floor.
