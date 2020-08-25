@@ -15,7 +15,7 @@ Execute the application by running app.py. You will need to update the file with
 ```
 howard = {
     'HG_TOKEN': [YOUR_TOKEN_HERE],
-    'uh': ]YOUR_UNIQUE_HASH_HERE]
+    'uh': [YOUR_UNIQUE_HASH_HERE]
 }
 ```
 
@@ -26,10 +26,11 @@ The following hunting locations have been built
 -   Valor Rift
 
 **Activate Code**
+
 Activate by using the following codes.
 
 ```
-mh_bwrift = BWrift(howard_cookies, howard_body)
+mh_bwrift = BWrift(howard)
 mh_bwrift.automateHunt()
 ```
 
@@ -54,6 +55,12 @@ pip install -r requirements.txt
 
 After logging into mousehunt, press F12 to access development tab. Click on 'camp' to trigger a round of data retrieval from server. Retrieve the token and unique hash as shown below.
 
+This is the location of token
+![Image of Yaktocat](https://www.github.com/howardlhw/images/token.png)
+
+This is how you get the unique hash (uh)
+![Image of Yaktocat](https://www.github.com/howardlhw/images/unique_hash.png)
+
 ## Step 3 - Configuring app.py
 
 Use a text editor to edit app.py. Update the token, session[id] (if applicable) and unique hash.
@@ -74,7 +81,7 @@ Update the following section with the updated codes. The instance will run autom
 ```
 def runHornContinuously():
     while True:
-        mh_vrift = Vrift(howard_cookies, howard_body)
+        mh_vrift = Vrift(howard)
         mh_vrift.automateHunt()
 
         time.sleep(600)
@@ -105,7 +112,7 @@ Each door comes with 3 lenght variations, they are short (s), medium (m), or lon
 List the preferred doors in order of descending preference, and pass it as an array to the automateHunt method. For example, if the preferred door is `['y3l','y3m','y3s','y2l', 'y2m', 'y2s', 'yl', 'ym', 'ys']`, the corresponding method to activate is as below. The algorithm shuffles the door when the preferred door is not found.
 
 ```
-mh_labyrinth = Labyrinth(howard_cookies, howard_body)
+mh_labyrinth = Labyrinth(howard)
 mh_labyrinth.automateHunt(['y3l','y3m','y3s','y2l', 'y2m', 'y2s', 'yl', 'ym', 'ys'])
 ```
 
@@ -154,7 +161,7 @@ The chambers are selected automatically based on the user's stats. This is still
 Activate by using the following codes.
 
 ```
-mh_bwrift = BWrift(howard_cookies, howard_body)
+mh_bwrift = BWrift(howard)
 mh_bwrift.automateHunt()
 ```
 
@@ -163,6 +170,6 @@ mh_bwrift.automateHunt()
 In Valour Rift, the user input comes in during the toggling of Champion's Fire. Champion's fire is activated on Floor 8 and deactivated on every other floor.
 
 ```
-mh_vrift = Vrift(howard_cookies, howard_body)
+mh_vrift = Vrift(howard)
 mh_vrift.automateHunt()
 ```
