@@ -2,6 +2,12 @@
 
 Python scripts for making our mouse hunting lives easier. A few selected hunting locations have been built due to the additional human-input requirement during hunting.
 
+# Disclaimer
+
+Note that using the bot to automate any processes is against the Mousehunt's gameplay rules and may result in the termination of the account. We do not take any responsibilities if your account has been impacted by using the following scripts.
+
+This project is intended for hobby and coding practices only.
+
 # Quick Overview
 
 To use this application, make sure you have python 3 installed on your computer. Install virtual environment and the additional dependencies.
