@@ -68,7 +68,7 @@ class Labyrinth():
                 eprint('Labyrinth', f'Found door, door is {self.chosenDoor}')
                 break
 
-            # self.scrambleDoor()
+            self.scrambleDoor()
             eprint('Labyrinth', 'Preferred door not available, scrambled door')
             time.sleep(30)
 

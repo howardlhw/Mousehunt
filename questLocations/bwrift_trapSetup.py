@@ -22,7 +22,7 @@ trapSetup = {
     'acolyte_chamber': {
         'quantumQuarts': True,
         'bait': 'runic_string_cheese',
-        'trinket': 'super_rift_vacuum_trinket'
+        'trinket': 'rift_vacuum_trinket'
     },
     'timewarp_chamber': {
         'quantumQuarts': False,
@@ -42,6 +42,11 @@ trapSetup = {
     'gearWorks': {
         'quantumQuarts': False,
         'bait': 'brie_string_cheese',
-        'trinket': 'super_rift_vacuum_trinket'
+        'trinket': 'rift_vacuum_trinket'
+    },
+    'entrance_chamber': {
+        'quantumQuarts': False,
+        'bait': 'brie_string_cheese',
+        'trinket': 'rift_vacuum_trinket'
     }
 }

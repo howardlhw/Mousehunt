@@ -22,7 +22,9 @@ class Bwrift():
         return False
 
     def isPortalsOpened(self):
-        if list(set(self.getCurrentPortals()))[0] == "closed":
+        currentPortals = self.getCurrentPortals()
+
+        if 'closed' in currentPortals and len(list(set(currentPortals))) == 1:
             return False
         return True
 
@@ -44,12 +46,17 @@ class Bwrift():
         return self.data['user']['quests'][self.quest]['status_effects']
 
     def getQuantumQuartsStatus(self):
-        return self.data['user']['quests'][self.quest]['status_effects']
+        if self.data['user']['quests'][self.quest]['items']['rift_quantum_quartz_stat_item']['status'] == 'selected':
+            return True
+        return False
 
     def getObeliskCharge(self):
         return self.data['user']['quests'][self.quest]['obelisk_percent']
 
     # Setters
+    def setData(self, data):
+        self.data = data
+
     def setTrap(self, settings):
         """
         Cheese Options (bait)
@@ -101,19 +108,24 @@ class Bwrift():
         7. runic chamber if all else fails
         8. ancient chamber if oh well....
         9. Gear works, seriously?
+        10. Enter the tower
 
         returns the name of the chamber
         """
+        eprint('Bristle Woods Rift', portals)
 
         portals = self.getCurrentPortals()
+        sand_threshold = 65
+        runic_threshold = 65
+        timewramp_runicRqd_thresdhold = 30
 
-        # Condition 1 (TODO)
-        # if 'security_chamber' in chambers:
-        #     return 'security_chamber'
+        # Condition 1
+        if 'security_chamber' in portals:
+            return 'security_chamber'
 
-        # Condition 2 (TODO)
-        # if self.getStatusEffects()['un'] == 'active':
-        #     return 'guard_barracks'
+        # Condition 2
+        if self.getStatusEffects()['un'] == 'active':
+            return 'guard_barracks'
 
         # Condition 3
         if 'lucky_tower' in portals:
@@ -124,25 +136,31 @@ class Bwrift():
             return 'hidden_treasury'
 
         # Condition 5
-        if self.getItemsCount(
-                'rift_hourglass_sand_stat_item') > 65 and self.getItemsCount(
-                    'runic_string_cheese'
-                ) > 65 and 'acolyte_chamber' in portals:
+        if self.getItemsCount('rift_hourglass_sand_stat_item') > sand_threshold and \
+            self.getItemsCount('runic_string_cheese') > runic_threshold and 'acolyte_chamber' in portals:
             return 'acolyte_chamber'
 
         # Condition 6
-        if 'timewarp_chamber' in portals and self.getItemsCount(
-                'rift_hourglass_sand_stat_item') < 70:
+        if 'timewarp_chamber' in portals and \
+            self.getItemsCount('rift_hourglass_sand_stat_item') <= sand_threshold and \
+                self.getItemsCount('runic_string_cheese') > timewramp_runicRqd_thresdhold:
             return 'timewarp_chamber'
 
         # Condition 7
-        if 'magic_chamber' in portals:
+        if 'magic_chamber' in portals and \
+            self.getItemsCount('runic_string_cheese') <= runic_threshold:
             return 'magic_chamber'
 
-        # # Condition 8 (TODO)
-        # if 'ancient_chamber' in portals:
-        #     return 'ancient_chamber'
-        eprint('Bristle Woods Rift', f'No Suitable portal')
+        # # Condition 8
+        if 'ancient_chamber' in portals:
+            return 'ancient_chamber'
+
+        # Condition 9
+        if 'entrance_chamber' in portals:
+            return 'basic_chamber'
+
+        eprint('Bristle Woods Rift', f'No Suitable portal, selecting the first portal')
+        return portals[0]
 
         return None
 
@@ -157,9 +175,11 @@ class Bwrift():
 
     # Common Actions
     def chamberSetup(self, setup):
-        if setup['quantumQuarts'] and not self.getItemIsActiveStatus('rift_quantum_quartz_stat_item'):
+        if setup['quantumQuarts'] and not self.getItemIsActiveStatus(
+                'rift_quantum_quartz_stat_item'):
             self.toggleQuantumQuarts()
-        if not setup['quantumQuarts'] and self.getItemIsActiveStatus('rift_quantum_quartz_stat_item'):
+        if not setup['quantumQuarts'] and self.getItemIsActiveStatus(
+                'rift_quantum_quartz_stat_item'):
             self.toggleQuantumQuarts()
 
         self.setTrap({'bait': setup['bait']})
@@ -167,7 +187,11 @@ class Bwrift():
         eprint('Bristle Woods Rift', f'Changed Setup')
 
     def convertPotionToCheese(self, potion, quantity):
-        settings = {'potion': potion, 'num_potions': quantity, 'recipe_index': 0}
+        settings = {
+            'potion': potion,
+            'num_potions': quantity,
+            'recipe_index': 0
+        }
         api_usePotion(self.request_cookies, {**self.request_body, **settings})
         eprint('Bristle Woods Rift', f'Converted {quantity} {potion}')
 
@@ -179,14 +203,19 @@ class Bwrift():
 
         # Brew the potions, if any
         if self.getItemsCount('ancient_string_cheese_potion') > 0:
-            self.convertPotionToCheese('ancient_string_cheese_potion', self.getItemsCount('ancient_string_cheese_potion'))
+            self.convertPotionToCheese(
+                'ancient_string_cheese_potion',
+                self.getItemsCount('ancient_string_cheese_potion'))
         if self.getItemsCount('runic_string_cheese_potion') > 0:
-            self.convertPotionToCheese('runic_string_cheese_potion', self.getItemsCount('runic_string_cheese_potion'))
+            self.convertPotionToCheese(
+                'runic_string_cheese_potion',
+                self.getItemsCount('runic_string_cheese_potion'))
 
         # Toggle for the case at acolyte chamber
         if self.getObeliskCharge() == 100 and self.getQuantumQuartsStatus():
             self.toggleQuantumQuarts()
-            eprint('Bristle Woods Rift', 'Obelisk fully charged, disable Quantum Quarts.')
+            eprint('Bristle Woods Rift',
+                   'Obelisk fully charged, disable Quantum Quarts.')
 
         # End loop if portals are closed
         if not self.isPortalsOpened():
