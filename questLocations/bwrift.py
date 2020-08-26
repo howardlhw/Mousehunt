@@ -77,7 +77,7 @@ class Bwrift():
         Chamber Options
         acolyte_chamber: Acolyte Chamber
         magic_chamber: Runic Laboratory
-        ?????? : Ancient Laboratory
+        potion_chamber : Ancient Laboratory
         timewarp_chamber: Timewarp Chamber
         ?????? : Guard barracks
         ?????? : Paladin
@@ -112,9 +112,10 @@ class Bwrift():
 
         returns the name of the chamber
         """
-        eprint('Bristle Woods Rift', portals)
 
         portals = self.getCurrentPortals()
+        eprint('Bristle Woods Rift', portals)
+
         sand_threshold = 65
         runic_threshold = 65
         timewramp_runicRqd_thresdhold = 30
@@ -152,8 +153,8 @@ class Bwrift():
             return 'magic_chamber'
 
         # # Condition 8
-        if 'ancient_chamber' in portals:
-            return 'ancient_chamber'
+        if 'potion_chamber' in portals:
+            return 'potion_chamber'
 
         # Condition 9
         if 'entrance_chamber' in portals:

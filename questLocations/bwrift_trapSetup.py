@@ -34,10 +34,10 @@ trapSetup = {
         'bait': 'ancient_string_cheese',
         'trinket': 'rift_trinket'
     },
-    'ancient_chamber': {
+    'potion_chamber': {
         'quantumQuarts': False,
         'bait': 'brie_string_cheese',
-        'trinket': 'rift_trinkey'
+        'trinket': 'rift_trinket'
     },
     'gearWorks': {
         'quantumQuarts': False,

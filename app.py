@@ -28,7 +28,7 @@ def runHornContinuously():
         # mh_vrift.automateHunt()
 
         mh_bwrift = Bwrift(acc1)
-        # mh_bwrift.chamberSetup(trapSetup['acolyte_chamber']) # Currently has 87 sands
+        mh_bwrift.chamberSetup(trapSetup['potion_chamber']) # Currently has 87 sands
         mh_bwrift.automateHunt()
 
         mh_labyrinth = Labyrinth(acc2, debug=True)
