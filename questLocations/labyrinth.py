@@ -29,6 +29,8 @@ class Labyrinth():
         debug(f'Preference: {doors_preference}', self.debug)
         debug(f'Current Doors: {self.getCurrentDoors()}', self.debug)
 
+        self.data = api_userData(self.request_cookies)
+
         for preference in doors_preference:
             if preference in self.getCurrentDoors():
                 self.chosenDoor = preference
@@ -66,7 +68,7 @@ class Labyrinth():
                 eprint('Labyrinth', f'Found door, door is {self.chosenDoor}')
                 break
 
-            self.scrambleDoor()
+            # self.scrambleDoor()
             eprint('Labyrinth', 'Preferred door not available, scrambled door')
             time.sleep(30)
 

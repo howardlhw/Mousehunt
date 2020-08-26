@@ -4,10 +4,9 @@ from util import eprint
 import time
 
 
-class Bwrift():
+class Crafting():
     def __init__(self, request_acc):
-        self.URL = "https://www.mousehuntgame.com/managers/ajax/environment/rift_bristle_woods.php"
-        self.quest = "QuestRiftBristleWoods"
+        self.URL = "https://www.mousehuntgame.com/managers/ajax/users/crafting.php"
         self.request_cookies = {"HG_TOKEN": request_acc['HG_TOKEN']}
         self.request_body = {"uh": request_acc['uh']}
         self.data = api_userData(self.request_cookies)

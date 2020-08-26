@@ -24,15 +24,15 @@ acc2 = {
 
 def runHornContinuously():
     while True:
-        mh_vrift = Vrift(howard)
-        mh_vrift.automateHunt()
+        # mh_vrift = Vrift(howard)
+        # mh_vrift.automateHunt()
 
         mh_bwrift = Bwrift(acc1)
         # mh_bwrift.chamberSetup(trapSetup['acolyte_chamber']) # Currently has 87 sands
         mh_bwrift.automateHunt()
 
         mh_labyrinth = Labyrinth(acc2, debug=True)
-        mh_labyrinth.automateHunt(['y3l','y3m','y3s','y2l', 'y2m', 'y2s', 'yl', 'ym', 'ys'])
+        mh_labyrinth.automateHunt(['h3l','h3m','h3s','h2l', 'h2m', 'h2s', 'hl', 'hm', 'hs'])
 
         time.sleep(600)
 
