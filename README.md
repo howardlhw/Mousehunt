@@ -42,6 +42,8 @@ mh_bwrift.automateHunt()
 
 ## Step 1 - Creating Virtual Environmnet
 
+Install python 3 on your computer, any python3 version should run the code without problems.
+
 If you have not installed virtualenv, install by by executing `pip install virtualenv`
 
 Create python virtual environment by executing the following codes
@@ -79,6 +81,8 @@ user = {
 ## Step 4 - Executing script
 
 Update the following section with the updated codes. The instance will run automatically when automateHunt is called. The parameters of automate hunt to pass into can be found in the respective sections.
+
+You can execute this script by using `python app.py`
 
 ```
 def runHornContinuously():
@@ -180,3 +184,36 @@ Execute the code by:
 mh_vrift = Vrift(user)
 mh_vrift.automateHunt()
 ```
+
+## Mapping
+
+The mapping algorithm works by searching for the uncaught mouse, automatically catch the remaining mouse. To use this script, modify the user information to include the `map_id`.
+
+user = {
+    'HG_TOKEN': [YOUR_TOKEN_HERE],
+    'uh': [YOUR_UNIQUE_HASH_HERE],
+    'map_id': [YOUR_UNIQUE_MAP_ID_HERE]
+}
+
+You can get the map ID by pressing F12 on the browser, and click on the map to trigger the URL call. The map id can be found as below.
+
+![Image of hash](https://raw.githubusercontent.com/howardlhw/Mousehunt/master/images/map_id.png)
+
+
+Update the trap setup and ensure that you have the corresponding trap. If you do not have the trap, the trap will not be switched by the script. 
+
+```
+'tactical': {
+    'weapon': 'geyser_tactical_weapon',
+    # 'trinket': 'rift_vacuum_trinket'
+},
+```
+
+Fun the following script in the main application to initiate the mapping.
+
+
+```
+mh_mapping = Mapping(user)
+mh_mapping.automateHunt()
+```
+
