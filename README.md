@@ -189,11 +189,13 @@ mh_vrift.automateHunt()
 
 The mapping algorithm works by searching for the uncaught mouse, automatically catch the remaining mouse. To use this script, modify the user information to include the `map_id`.
 
+```
 user = {
     'HG_TOKEN': [YOUR_TOKEN_HERE],
     'uh': [YOUR_UNIQUE_HASH_HERE],
     'map_id': [YOUR_UNIQUE_MAP_ID_HERE]
 }
+```
 
 You can get the map ID by pressing F12 on the browser, and click on the map to trigger the URL call. The map id can be found as below.
 
