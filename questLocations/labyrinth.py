@@ -26,8 +26,6 @@ class Labyrinth():
         # y2 = superior fealty, s2 = superior scholar, h2 = superior tech
         # y3??
         # s = short, m = medium, l = long
-        debug(f'Preference: {doors_preference}', self.debug)
-        debug(f'Current Doors: {self.getCurrentDoors()}', self.debug)
 
         self.data = api_userData(self.request_cookies)
 
@@ -58,7 +56,7 @@ class Labyrinth():
 
         # Check if the doors are opened
         if len(list(set(self.getCurrentDoors())))==1 and list(set(self.getCurrentDoors()))[0] == None:
-            eprint('Labyrinth', 'Doors closed')
+            # eprint('Labyrinth', 'Doors closed')
             return 
 
         # Commence loop to scramble door until the preferred door is available

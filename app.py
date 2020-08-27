@@ -3,11 +3,14 @@ from questLocations.labyrinth import Labyrinth
 from questLocations.vrift import Vrift
 from questLocations.bwrift import Bwrift
 from questLocations.bwrift_trapSetup import trapSetup
-
+from questLocations.mapping import Mapping
+from random import randint
+from util import eprint
 
 howard = {
     "HG_TOKEN": "k7e0InS5x4Jwz05LlZVW2s35u1y10POHOj3WeRfPo55BfC4SoDVqpGjfSJR8fD0y",
-    "uh": "RdQtaaE8"
+    "uh": "RdQtaaE8",
+    'map_id': 2709742
 }
 
 acc1 = {
@@ -27,14 +30,20 @@ def runHornContinuously():
         # mh_vrift = Vrift(howard)
         # mh_vrift.automateHunt()
 
+
+        mh_mapping = Mapping(howard)
+        mh_mapping.automateHunt()
+
         mh_bwrift = Bwrift(acc1)
-        mh_bwrift.chamberSetup(trapSetup['potion_chamber']) # Currently has 87 sands
         mh_bwrift.automateHunt()
 
         mh_labyrinth = Labyrinth(acc2, debug=True)
         mh_labyrinth.automateHunt(['h3l','h3m','h3s','h2l', 'h2m', 'h2s', 'hl', 'hm', 'hs'])
 
-        time.sleep(600)
+
+        time.sleep(60 + randint(0, 10))
+        # time.sleep(10)
 
 if __name__ == "__main__":
+    eprint("Main", "Application Started")
     runHornContinuously()

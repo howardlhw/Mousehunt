@@ -1,6 +1,7 @@
 from questLocations.api import api_userData, api_call, api_changeTrap, api_usePotion
 from questLocations.bwrift_trapSetup import trapSetup
 from util import eprint
+from random import randint
 import time
 
 
@@ -109,6 +110,7 @@ class Bwrift():
         8. ancient chamber if oh well....
         9. Gear works, seriously?
         10. Enter the tower
+        11. Never bother to enter ingress chamber
 
         returns the name of the chamber
         """
@@ -119,6 +121,11 @@ class Bwrift():
         sand_threshold = 65
         runic_threshold = 65
         timewramp_runicRqd_thresdhold = 30
+
+        # Banished chambers
+        if 'ingress_chamber' in portals:
+            portals.remove('ingress_chamber')
+        
 
         # Condition 1
         if 'security_chamber' in portals:
@@ -159,6 +166,7 @@ class Bwrift():
         # Condition 9
         if 'entrance_chamber' in portals:
             return 'basic_chamber'
+
 
         eprint('Bristle Woods Rift', f'No Suitable portal, selecting the first portal')
         return portals[0]
@@ -203,14 +211,10 @@ class Bwrift():
             return
 
         # Brew the potions, if any
-        if self.getItemsCount('ancient_string_cheese_potion') > 0:
-            self.convertPotionToCheese(
-                'ancient_string_cheese_potion',
-                self.getItemsCount('ancient_string_cheese_potion'))
-        if self.getItemsCount('runic_string_cheese_potion') > 0:
-            self.convertPotionToCheese(
-                'runic_string_cheese_potion',
-                self.getItemsCount('runic_string_cheese_potion'))
+        if self.getItemsCount('ancient_string_cheese_potion') > randint(2, 10):
+            self.convertPotionToCheese('ancient_string_cheese_potion', self.getItemsCount('ancient_string_cheese_potion'))
+        if self.getItemsCount('runic_string_cheese_potion') > randint(2, 10):
+            self.convertPotionToCheese('runic_string_cheese_potion', self.getItemsCount('runic_string_cheese_potion'))
 
         # Toggle for the case at acolyte chamber
         if self.getObeliskCharge() == 100 and self.getQuantumQuartsStatus():
@@ -220,7 +224,7 @@ class Bwrift():
 
         # End loop if portals are closed
         if not self.isPortalsOpened():
-            eprint('Bristle Woods Rift', 'Portals are not opened')
+            # eprint('Bristle Woods Rift', 'Portals are not opened')
             return
 
         # Select the portal and enter the chamber, then change trap setup
