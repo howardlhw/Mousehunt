@@ -206,12 +206,11 @@ Update the trap setup and ensure that you have the corresponding trap. If you do
 
 ```
 'tactical': {
-    'weapon': 'geyser_tactical_weapon',
-    # 'trinket': 'rift_vacuum_trinket'
+    'weapon': 'geyser_tactical_weapon'
 },
 ```
 
-Fun the following script in the main application to initiate the mapping.
+Run the following script in the main application to initiate the mapping.
 
 
 ```
