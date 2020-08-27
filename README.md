@@ -197,7 +197,7 @@ user = {
 
 You can get the map ID by pressing F12 on the browser, and click on the map to trigger the URL call. The map id can be found as below.
 
-![Image of hash](https://raw.githubusercontent.com/howardlhw/Mousehunt/master/images/map_id.png)
+![Image of hash](https://github.com/howardlhw/Mousehunt/blob/BWRift/images/map_id.png)
 
 
 Update the trap setup and ensure that you have the corresponding trap. If you do not have the trap, the trap will not be switched by the script. 
