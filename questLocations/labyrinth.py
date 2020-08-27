@@ -20,7 +20,6 @@ class Labyrinth():
     def getCurrentDoors(self):
         return [door['choice'] for door in self.data['user']['quests']['QuestLabyrinth']['doors']]
 
-
     def checkDesiredDoors(self, doors_preference):
         # y = plain fealty, s = plain scholar, h = plain tech
         # y2 = superior fealty, s2 = superior scholar, h2 = superior tech

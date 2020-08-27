@@ -37,12 +37,15 @@ def runHornContinuously():
         mh_bwrift = Bwrift(acc1)
         mh_bwrift.automateHunt()
 
-        mh_labyrinth = Labyrinth(acc2, debug=True)
-        mh_labyrinth.automateHunt(['h3l','h3m','h3s','h2l', 'h2m', 'h2s', 'hl', 'hm', 'hs'])
+        # y = plain fealty, s = plain scholar, h = plain tech
+        # y2 = superior fealty, s2 = superior scholar, h2 = superior tech
+        # y3 = epic fealty, s3 = epic scholar, h3 = epic tech
+        # s = short, m = medium, l = long
+        # mh_labyrinth = Labyrinth(acc2, debug=True)
+        # mh_labyrinth.automateHunt(['h3l','h3m','h3s','h2l', 'h2m', 'h2s', 'hl', 'hm', 'hs'])
 
 
-        time.sleep(60 + randint(0, 10))
-        # time.sleep(10)
+        time.sleep(120 + randint(0, 60))
 
 if __name__ == "__main__":
     eprint("Main", "Application Started")
