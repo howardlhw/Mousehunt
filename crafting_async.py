@@ -7,8 +7,8 @@ import datetime
 # Step 1 - update the user credentials
 # main account
 howard = {
-    "HG_TOKEN": "k7e0InS5x4Jwz05LlZVW2s35u1y10POHOj3WeRfPo55BfC4SoDVqpGjfSJR8fD0y",
-    "uh": "RdQtaaE8"
+    "HG_TOKEN": "kse0InS5x4Jwz05LlZVa2s35u1y10POHOj3WeRfPo55BfCw1oDVqpGjfSJR8fD0y",
+    "uh": "Rdvta1E8"
 }
 
 

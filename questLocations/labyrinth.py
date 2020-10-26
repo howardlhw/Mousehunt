@@ -50,12 +50,12 @@ class Labyrinth():
 
     def automateHunt(self, doorPreferences):
         if not self.isAtCurrentLocation():
-            eprint('Labyrinth', 'User not at current location')
+            # eprint('Labyrinth', 'User not at current location')
             return
 
         # Check if the doors are opened
         if len(list(set(self.getCurrentDoors())))==1 and list(set(self.getCurrentDoors()))[0] == None:
-            # eprint('Labyrinth', 'Doors closed')
+            eprint('Labyrinth', 'Doors closed')
             return 
 
         # Commence loop to scramble door until the preferred door is available

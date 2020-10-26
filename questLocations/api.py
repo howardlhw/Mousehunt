@@ -25,3 +25,4 @@ def api_userData(cookies):
 def api_usePotion(cookies, body):
     URL = "https://www.mousehuntgame.com/managers/ajax/users/usepotion.php"
     return requests.post(URL, headers=headers, cookies=cookies, data=body).json()
+

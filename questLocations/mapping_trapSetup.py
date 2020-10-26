@@ -35,6 +35,7 @@ trapSetup = {
 # gouda_cheese
 # medium_queso_cheese
 # mild_queso_cheese
+# bland_queso_cheese
 # grilled_cheese
 # duskshade_camembert_cheese
 # brie_cheese
@@ -45,6 +46,7 @@ trapSetup = {
 # gnarled_cheese
 # gauntlet_cheese_2 
 # cheddar_cheese
+# radioactive_blue_cheese
 # graveblossom_camembert_cheese
 # cherry_cheese
 # marble_cheese
@@ -53,6 +55,8 @@ trapSetup = {
 # riftiago_cheese
 # glowing_gruyere_cheese
 # ancient_cheese
+# crunchy_cheese
+# gouda_cheese
 
 mouseCatchSequence = [
     {
@@ -76,10 +80,6 @@ mouseCatchSequence = [
         'bait': 'super_brie_cheese',
     },
     {
-        'name': 'Coffin Zombie',
-        'bait': 'crimson_cheese'
-    },
-    {
         'name': 'Curious Chemist',
         'bait': 'gnarled_cheese'
     },
@@ -90,10 +90,6 @@ mouseCatchSequence = [
     {
         'name': 'Terra',
         'bait': 'gauntlet_cheese_5'
-    },
-    {
-        'name': 'Pearl Diver',
-        'bait': 'brie_cheese'
     },
     {
         'name': 'Cursed Librarian',
@@ -262,5 +258,65 @@ mouseCatchSequence = [
     {
         'name': 'Foxy',
         'bait': 'gnarled_cheese'
-    }
+    },
+    {
+        'name': 'Tiny Toppler',
+        'bait': 'bland_queso_cheese'
+    },
+    {
+        'name': 'Pump Raider',
+        'bait': 'brie_cheese'
+    },
+    {
+        'name': 'Bat',
+        'bait': 'radioactive_blue_cheese'
+    },
+    {
+        'name': 'Aged',
+        'bait': 'crunchy_cheese'
+    },
+    {
+        'name': 'Squeaker Bot',
+        'bait': 'gouda_cheese'
+    },
+    {
+        'name': 'Water Nymph',
+        'bait': 'gnarled_cheese'
+    },
+    {
+        'name': 'Diamond',
+        'bait': 'white_cheddar_cheese'
+    },
+    {
+        'name': 'Curious Chemist',
+        'bait': 'gnarled_cheese'
+    },
+    {
+        'name': 'Granite',
+        'bait': 'gouda_cheese'
+    },
+    {
+        'name': 'Taleweaver',
+        'bait': 'shell_cheese'
+    },
+    {
+        'name': 'Ignis',
+        'bait': 'gauntlet_cheese_5'
+    },
+    {
+        'name': 'Lightning Rod',
+        'bait': 'marble_cheese'
+    },
+    {
+        'name': 'Caretaker',
+        'bait': 'gumbo_cheese'
+    },
+    {
+        'name': 'Lockpick',
+        'bait': 'gauntlet_cheese_2'
+    },
+    {
+        'name': 'Pugilist',
+        'bait': 'white_cheddar_cheese'
+    },
 ]

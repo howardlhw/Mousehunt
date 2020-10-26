@@ -18,6 +18,10 @@ class Mapping():
         self.map_id = request_acc['map_id']
         self.map_data = self.getMapData()
 
+    def getMapID(self):
+        return self.data['user']['quests']['QuestRelicHunter']['maps'][0][
+            'map_id']
+
     def getMapData(self):
         self.request_body['action'] = 'map_info'
         self.request_body['map_id'] = self.map_id
@@ -27,7 +31,10 @@ class Mapping():
         return self.data['user']['environment_type']
 
     def getAllMiceOnMap(self):
-        return {mouse['name']: mouse for mouse in self.map_data['treasure_map']['goals']['mouse']}
+        return {
+            mouse['name']: mouse
+            for mouse in self.map_data['treasure_map']['goals']['mouse']
+        }
 
     def getOneMouseOnMap(self, mouse):
         return self.getAllMiceOnMap().get(mouse)
@@ -54,7 +61,8 @@ class Mapping():
     def checkIfHasMouse(self, mouse):
         if self.getOneMouseOnMap(mouse) == None:
             return False
-        if self.getOneMouseOnMap(mouse)['unique_id'] in self.getAllCaughtMouseIDs():
+        if self.getOneMouseOnMap(
+                mouse)['unique_id'] in self.getAllCaughtMouseIDs():
             return False
         return True
 
@@ -66,29 +74,36 @@ class Mapping():
     def setTrap(self, settings):
         api_changeTrap(self.request_cookies, {**self.request_body, **settings})
 
-
     # Main Automation
+    # Map ID can be found under quests /
     def automateHunt(self):
         # Get current target mouse
-        
         for mouse in mouseCatchSequence:
             # Check if the mouse has been caught, if yes, move on
             if not self.checkIfHasMouse(mouse['name']):
                 continue
-            
+
             # Check if the current location is corrent, if yes, means we have been catching there
             # Then move on
-            target_location = self.getLocationName(self.getMouseLocationId(mouse['name']))
+
+            target_location = self.getLocationName(
+                self.getMouseLocationId(mouse['name']))
             if self.getCurrentLocation() == target_location:
                 return
-                
+
             # Time to catch the next mouse
             # Travel to the destination and setup trap
             eprint('Mapping', f'Mouse target is {mouse["name"]}')
             eprint("DEBUG (Weakness)", self.getMouseWeakness(mouse['name']))
             self.setTravelDestination(target_location)
             eprint('Mapping', f'Moving to {target_location}')
-            self.setTrap({'weapon': trapSetup[self.getMouseWeakness(mouse["name"])]["weapon"]})
+            self.setTrap({
+                'weapon':
+                trapSetup[self.getMouseWeakness(mouse["name"])]["weapon"]
+            })
             self.setTrap({'bait': mouse['bait']})
-            eprint('Mapping', f'Changing trap to {trapSetup[self.getMouseWeakness(mouse["name"])]["weapon"]}')
+            eprint(
+                'Mapping',
+                f'Changing trap to {trapSetup[self.getMouseWeakness(mouse["name"])]["weapon"]}'
+            )
             return

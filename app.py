@@ -4,48 +4,67 @@ from questLocations.vrift import Vrift
 from questLocations.bwrift import Bwrift
 from questLocations.bwrift_trapSetup import trapSetup
 from questLocations.mapping import Mapping
+from questLocations.questProgress import Quest
+from questLocations.mouseDetect import MouseDetect
+from questLocations.floatingislands import FloatingIslands
 from random import randint
 from util import eprint
+import datetime
 
 howard = {
-    "HG_TOKEN": "k7e0InS5x4Jwz05LlZVW2s35u1y10POHOj3WeRfPo55BfC4SoDVqpGjfSJR8fD0y",
-    "uh": "RdQtaaE8",
-    'map_id': 2709742
+    "HG_TOKEN":
+    "k7e0InS5x4Jwz05LlZVW2s35u1y10POHOj3WeRfPo55BfC4SoDVqpGjfSJR8fD0y",
+    "uh": "54TYb49T"
 }
 
 acc1 = {
-    "HG_TOKEN": "72wdLJWpIogUFJ912jQQf6TmcvbgmdM79Y6n094N155aM5BdWHHNmWFL79wS55ly",
+    "HG_TOKEN":
+    "72wdLJWpIogUFJ912jQQf6TmcvbgmdM79Y6n094N155aM5BdWHHNmWFL79wS55ly",
     "uh": "LeA1Z1B4"
 }
 
-
 acc2 = {
-    "HG_TOKEN": "wI4Q2y0uk4TK1yifrR33vZw9Vq1FkZs73PD22VMSQ600HtOu1f5bn0s6L240278w",
-    "uh": "Gc112MbD"
+    "HG_TOKEN":
+    "wI4Q2y0uk4TK1yifrR33vZw9Vq1FkZs73PD22VMSQ600HtOu1f5bn0s6L240278w",
+    "uh": "Gc112MbD",
 }
 
 
 def runHornContinuously():
+    mouselist = []
     while True:
-        # mh_vrift = Vrift(howard)
-        # mh_vrift.automateHunt()
+        try:
 
+            mh_vrift = Vrift(howard)
+            mh_vrift.automateHunt()
 
-        mh_mapping = Mapping(howard)
-        mh_mapping.automateHunt()
+            # mh_fi = FloatingIslands(howard)
+            # mh_fi.automateHunt()
 
-        mh_bwrift = Bwrift(acc1)
-        mh_bwrift.automateHunt()
+            # mh_mapping = Mapping(howard)
+            # mh_mapping.automateHunt()
 
-        # y = plain fealty, s = plain scholar, h = plain tech
-        # y2 = superior fealty, s2 = superior scholar, h2 = superior tech
-        # y3 = epic fealty, s3 = epic scholar, h3 = epic tech
-        # s = short, m = medium, l = long
-        # mh_labyrinth = Labyrinth(acc2, debug=True)
-        # mh_labyrinth.automateHunt(['h3l','h3m','h3s','h2l', 'h2m', 'h2s', 'hl', 'hm', 'hs'])
+            # mh_labyrinth = Labyrinth(howard)
+            # mh_labyrinth.automateHunt(['h3l','h3m','h3s','h2l', 'h2m', 'h2s', 'hl', 'hm', 'hs'])
 
+            mh_bwrift = Bwrift(acc1)
+            mh_bwrift.automateHunt()
 
-        time.sleep(120 + randint(0, 60))
+            # mh_mapping = Mapping(acc2)
+            # mh_mapping.automateHunt()
+
+            # y = plain fealty, s = plain scholar, h = plain tech
+            # y2 = superior fealty, s2 = superior scholar, h2 = superior tech
+            # y3 = epic fealty, s3 = epic scholar, h3 = epic tech
+            # s = short, m = medium, l = long
+            # mh_labyrinth = Labyrinth(acc2)
+            # mh_labyrinth.automateHunt(['s3l','s3m','s3s','s2l', 's2m', 's2s', 'sl', 'sm', 'ss'])
+
+            time.sleep(120)
+        except Exception as e:
+            print(str(e))
+            continue
+
 
 if __name__ == "__main__":
     eprint("Main", "Application Started")

@@ -1,15 +1,20 @@
 trapSetup = {
-    'security_chamber': {
+    'silence_chamber': {
         'quantumQuarts': True,
         'bait': 'magical_string_cheese',
         'trinket': 'rift_vacuum_trinket'
     },
-    'guard_barracks': {
+    'guard_chamber': {
         'quantumQuarts': True,
-        'bait': 'magical_string_cheese',
+        'bait': 'runic_string_cheese',
         'trinket': 'rift_vacuum_trinket'
     },
-    'lucky_tower': {
+    'icy_chamber': {
+        'quantumQuarts': True,
+        'bait': 'brie_string_cheese',
+        'trinket': 'rift_vacuum_trinket'
+    },
+    'lucky_chamber': {
         'quantumQuarts': False,
         'bait': 'brie_string_cheese',
         'trinket': 'rift_trinkey'
@@ -44,7 +49,7 @@ trapSetup = {
         'bait': 'brie_string_cheese',
         'trinket': 'rift_vacuum_trinket'
     },
-    'entrance_chamber': {
+    'basic_chamber': {
         'quantumQuarts': False,
         'bait': 'brie_string_cheese',
         'trinket': 'rift_vacuum_trinket'
