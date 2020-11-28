@@ -1,7 +1,7 @@
 trapSetup = {
     'silence_chamber': {
         'quantumQuarts': True,
-        'bait': 'magical_string_cheese',
+        'bait': 'brie_string_cheese',
         'trinket': 'rift_vacuum_trinket'
     },
     'guard_chamber': {

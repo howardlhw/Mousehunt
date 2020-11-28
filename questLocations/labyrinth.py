@@ -55,7 +55,7 @@ class Labyrinth():
 
         # Check if the doors are opened
         if len(list(set(self.getCurrentDoors())))==1 and list(set(self.getCurrentDoors()))[0] == None:
-            eprint('Labyrinth', 'Doors closed')
+            # eprint('Labyrinth', 'Doors closed')
             return 
 
         # Commence loop to scramble door until the preferred door is available

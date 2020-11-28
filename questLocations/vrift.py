@@ -23,46 +23,86 @@ class Vrift():
     def getFloorLevel(self):
         return self.data['user']['quests']['QuestRiftValour']['floor']
 
-    def setToggleChampionFire(self):
-        floor = self.data['user']['quests']['QuestRiftValour']['floor']
-        at_eclipse = self.data['user']['quests']['QuestRiftValour'][
-            'is_at_eclipse']
-        fuel_enabled = self.data['user']['quests']['QuestRiftValour'][
+    def getCurrentStep(self):
+        return self.data['user']['quests']['QuestRiftValour']['current_step']
+
+    def getFloorPresige(self):
+        return self.data['user']['quests']['QuestRiftValour']['prestige']
+
+    def getSpeed(self):
+        return self.data['user']['quests']['QuestRiftValour']['power_up_data'][
+            'long_stride']['current_value']
+
+    def getCFStatus(self):
+        return self.data['user']['quests']['QuestRiftValour'][
             'is_fuel_enabled']
 
-        # CF Toggle determination
-        if at_eclipse and not fuel_enabled:
-            eprint(
-                'Valour Rift', "floor: %s, atEclipse: %s, fuelEnabled: %s" %
-                (floor, at_eclipse, fuel_enabled))
-            self.setShadeOFEclipseTrap()
-            return True
-        if not at_eclipse and fuel_enabled:
-            eprint(
-                'Valour Rift', "floor: %s, atEclipse: %s, fuelEnabled: %s" %
-                (floor, at_eclipse, fuel_enabled))
-            self.setNormalSetup()
-            return True
+    def enableCF(self):
+        if not self.getCFStatus():
+            eprint("Valour Rift", "Enable Champion fire at floor %s"%(self.getFloorLevel()))
+            self.toggleChampionFire()
 
-        return False
+    def disableCF(self):
+        if self.getCFStatus():
+            eprint("Valour Rift", "Disable Champion fire at floor %s"%(self.getFloorLevel()))
+            self.toggleChampionFire()
 
-    def setShadeOFEclipseTrap(self):
-        self.setTrap({'trinket': 'rift_2020_trinket'})
-        eprint('Valour Rift', 'Arming Eclipse Setup')
+    def getStepToEclipse(self):
+        if self.getFloorPresige() == 1:
+            return 140
+        if self.getFloorPresige() == 2:
+            return 351
+        if self.getFloorPresige() == 3:
+            return 632
+        if self.getFloorPresige() == 4:
+            return 983
+        if self.getFloorPresige() == 5:
+            return 1404
+        if self.getFloorPresige() == 6:
+            return 1895
+        if self.getFloorPresige() == 7:
+            return 2456
+        if self.getFloorPresige() == 8:
+            return 3087
+        if self.getFloorPresige() == 9:
+            return 3788
+        if self.getFloorPresige() == 10:
+            return 4559
+        if self.getFloorPresige() == 11:
+            return 5400
+        if self.getFloorPresige() == 12:
+            return 6311
 
-    def setNormalSetup(self):
-        self.setTrap({'trinket': 'rift_snowball_trinket'})
-        eprint('Valour Rift', 'Arming Climbing Setup')
+    def getCountOfCFToUse(self):
+        return (self.getStepToEclipse() -
+                self.getCurrentStep()) % self.getSpeed()
 
-    # def isAtEclipse(self):
-    #     self.data['user']['quests']['QuestRiftValour']['is_at_eclipse']
+    def getCurrentTrinket(self):
+        return self.data['user']['trinket_name']
+
+    def determineAndSetTrap(self):
+        # floor = self.data['user']['quests']['QuestRiftValour']['floor']
+        at_eclipse = self.data['user']['quests']['QuestRiftValour'][
+            'is_at_eclipse']
+
+        if at_eclipse:
+            # eprint('Valour Rift', "floor: %s, atEclipse: %s" %(self.getFloor(), at_eclipse))
+            self.setEclipseTrap()
+        else:
+            self.setNormalTrap()
+
+    def setEclipseTrap(self):
+        if self.getCurrentTrinket() != 'Rift 2020 Charm':
+            eprint('Valour Rift', f'Changing trinket to Rift 2020 Charm')
+            self.setTrap({'trinket': "rift_2020_trinket"})
+            
+    def setNormalTrap(self):
+        if self.getCurrentTrinket() != 'Rift Spooky Charm':
+            eprint('Valour Rift', f'Changing trinket to Rift Spooky Charm')
+            self.setTrap({'trinket': "rift_spooky_trinket"})
 
     def getFloor(self):
         return self.data['user']['quests']['QuestRiftValour']['floor']
-
-    def isFuelEnabled(self):
-        return self.data['user']['quests']['QuestRiftValour'][
-            'is_fuel_enabled']
 
     def setTrap(self, settings):
         res = api_changeTrap(self.request_cookies, {
@@ -74,15 +114,17 @@ class Vrift():
         if not self.isAtCurrentLocation():
             return
 
-        if self.getFloorLevel() > 24:
-            if not self.isFuelEnabled():
-                eprint('Valor Rift', 'Toggled Champion Fire')
-                self.toggleChampionFire()
-            return
+        # Champion fire treatments
+        if self.getFloorLevel() > 10 :
+            self.enableCF()
+        elif self.getFloorLevel()%8 == 0:
+            self.enableCF()
+        elif 0 < self.getCountOfCFToUse() < 5:
+            self.enableCF()
+        else:
+            self.disableCF()
 
-        if self.setToggleChampionFire():
-            self.toggleChampionFire()
-            eprint('Valor Rift', 'Toggled Champion Fire')
-            return
+        # Trap treatment
+        self.determineAndSetTrap()
 
         return
