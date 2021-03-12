@@ -1,4 +1,4 @@
-from questLocations.api import api_userData, api_call, api_changeTrap, api_usePotion
+from questLocations.api import api_userData, api_call, api_changeTrap, api_usePotion, api_userData_body
 from questLocations.bwrift_trapSetup import trapSetup
 from util import eprint
 from random import randint
@@ -11,7 +11,7 @@ class Bwrift():
         self.quest = "QuestRiftBristleWoods"
         self.request_cookies = {"HG_TOKEN": request_acc['HG_TOKEN']}
         self.request_body = {"uh": request_acc['uh']}
-        self.data = api_userData(self.request_cookies)
+        self.data = api_userData_body(self.request_cookies, {"uh": request_acc['uh'], "page_class":"Camp"})  
 
         # Customize settings
         self.usePortalScrambler = False
@@ -37,8 +37,8 @@ class Bwrift():
         ]
 
     def getItemsCount(self, itemName):
-        return self.data['user']['quests'][
-            self.quest]['items'][itemName]['quantity']
+        return int(self.data['user']['quests'][
+            self.quest]['items'][itemName]['quantity'])
 
     def getItemIsActiveStatus(self, itemName):
         status = ['selected']
@@ -122,7 +122,7 @@ class Bwrift():
         portals = list(set(portals))
         eprint('Bristle Woods Rift', portals)
 
-        aa_sand_threshold = 50  # For entering acolyate chamber
+        aa_sand_threshold = 40  # For entering acolyate chamber
         runic_threshold = aa_sand_threshold  # For entering acolyate chamber
         ancient_threshold_lower = 60
         runic_upper_threshold = 100
@@ -188,7 +188,7 @@ class Bwrift():
         if 'timewarp_chamber' in portals and \
             self.getItemsCount('rift_hourglass_sand_stat_item') > aa_sand_threshold:
             eprint('Bristle Woods Rift',
-                   'Removing timewarp due to insufficient runic cheese')
+                   'Removing timewarp due to sufficient time sand')
             portals.remove('timewarp_chamber')
 
         # Condition - Money is money
@@ -266,10 +266,10 @@ class Bwrift():
             self.convertPotionToCheese(
                 'ancient_string_cheese_potion',
                 self.getItemsCount('ancient_string_cheese_potion'))
-        # if self.getItemsCount('runic_string_cheese_potion') > randint(4, 10):
-        #     self.convertPotionToCheese(
-        #         'runic_string_cheese_potion',
-        #         self.getItemsCount('runic_string_cheese_potion'))
+        if self.getItemsCount('runic_string_cheese_potion') > randint(4, 10):
+            self.convertPotionToCheese(
+                'runic_string_cheese_potion',
+                self.getItemsCount('runic_string_cheese_potion'))
 
         # Toggle for the case at acolyte chamber
         if self.getObeliskCharge() == 100 and self.getQuantumQuartsStatus():
@@ -288,8 +288,8 @@ class Bwrift():
             self.scramblePortal()
             return
 
-        if determinedPortal == 'acolyte_chamber':
-            sandCount += 'with sandCount ' + str(self.getItemsCount("rift_hourglass_sand_stat_item"))
+        # if determinedPortal == 'acolyte_chamber':
+        sandCount += 'with sandCount ' + str(self.getItemsCount("rift_hourglass_sand_stat_item"))
         eprint('Bristle Woods Rift',f'Entering {determinedPortal} {sandCount}')
         self.selectChamber(determinedPortal)
         self.chamberSetup(trapSetup[determinedPortal])

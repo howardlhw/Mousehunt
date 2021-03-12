@@ -1,4 +1,4 @@
-from questLocations.api import api_userData, api_call, api_changeTrap
+from questLocations.api import api_userData, api_call, api_changeTrap, api_lny, api_userData_body
 from util import eprint
 import time
 
@@ -9,7 +9,8 @@ class Vrift():
         self.quest = "QuestRiftValour"
         self.request_cookies = {"HG_TOKEN": request_acc['HG_TOKEN']}
         self.request_body = {"uh": request_acc['uh']}
-        self.data = api_userData(self.request_cookies)
+        # self.data = api_userData(self.request_cookies)
+        self.data = api_userData_body(self.request_cookies, {"uh": request_acc['uh'], "page_class":"Camp"})  
 
     def isAtCurrentLocation(self):
         if self.data['user']['quests'].get(self.quest) != None:
@@ -92,14 +93,24 @@ class Vrift():
             self.setNormalTrap()
 
     def setEclipseTrap(self):
-        if self.getCurrentTrinket() != 'Rift 2020 Charm':
-            eprint('Valour Rift', f'Changing trinket to Rift 2020 Charm')
-            self.setTrap({'trinket': "rift_2020_trinket"})
+        if self.getCurrentTrinket() != 'Ultimate Charm':
+            eprint('Valour Rift', f'Setting Eclipse Trap')
+            self.setTrap({'trinket': "ultimate_trinket"})
+            self.setTrap({'base': "valour_rift_prestige_base"})
+            self.setCandle('red')
             
     def setNormalTrap(self):
-        if self.getCurrentTrinket() != 'Rift Spooky Charm':
-            eprint('Valour Rift', f'Changing trinket to Rift Spooky Charm')
-            self.setTrap({'trinket': "rift_spooky_trinket"})
+        # if self.getCurrentTrinket() != 'Rift Spooky Charm':
+        #     eprint('Valour Rift', f'Changing trinket to Rift Spooky Charm')
+        #     self.setTrap({'trinket': "rift_spooky_trinket"}) 
+        if self.getCurrentTrinket() != 'Rift Ultimate Lucky Power Charm':
+            eprint('Valour Rift', f'Changing trinket to RULPC')
+            self.setTrap({'trinket': "rift_ultimate_luck_power_trinket"}) 
+            self.setTrap({'base': "upgraded_denture_base"}) 
+            self.setCandle('yellow')
+
+            
+
 
     def getFloor(self):
         return self.data['user']['quests']['QuestRiftValour']['floor']
@@ -110,19 +121,37 @@ class Vrift():
             **settings
         })
 
+    def setCandle(self, settings):
+        if settings == 'yellow':
+            eprint('Valour Rift', f'Setting Yellow Candle')
+            res = api_lny(self.request_cookies, {
+                **self.request_body,
+                **{
+                'fuel': 'lny_unlit_lantern_stat_item',
+                'action': 'toggle_lantern'
+            }})
+        if settings == 'red':
+            eprint('Valour Rift', f'Setting Red Candle')
+            res = api_lny(self.request_cookies, {
+                **self.request_body,
+                **{
+                'fuel': 'lny_unlit_lantern_2018_stat_item',
+                'action': 'toggle_lantern'
+            }})
+
     def automateHunt(self):
         if not self.isAtCurrentLocation():
             return
 
-        # Champion fire treatments
-        if self.getFloorLevel() > 10 :
-            self.enableCF()
-        elif self.getFloorLevel()%8 == 0:
-            self.enableCF()
-        elif 0 < self.getCountOfCFToUse() < 5:
-            self.enableCF()
-        else:
-            self.disableCF()
+        # # Champion fire treatments
+        # if self.getFloorLevel() > 100 :
+        #     self.enableCF()
+        # elif self.getFloorLevel()%8 == 0:
+        #     self.enableCF()
+        # elif 0 < self.getCountOfCFToUse() < 5:
+        #     self.enableCF()
+        # else:
+        #     self.disableCF()
 
         # Trap treatment
         self.determineAndSetTrap()

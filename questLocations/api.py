@@ -30,3 +30,6 @@ def api_usePotion(cookies, body):
     URL = "https://www.mousehuntgame.com/managers/ajax/users/usepotion.php"
     return requests.post(URL, headers=headers, cookies=cookies, data=body).json()
 
+def api_lny(cookies, body):
+    URL = "https://www.mousehuntgame.com/managers/ajax/events/lunar_new_year.php"
+    return requests.post(URL, headers=headers, cookies=cookies, data=body).json()
